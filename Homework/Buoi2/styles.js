@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     },
     itemSchedule: {
         margin: '2%',
-        width: '80%',
-        height: '20%',
+        width: Dimensions.get('window').width * 0.8,
+        height: Dimensions.get('window').height * 0.15,
         borderRadius: 5,
         backgroundColor: '#3E4659',
         justifyContent: 'center',
