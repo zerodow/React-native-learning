@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import ComicItem from './ComicItem';
 import { data } from './database.json';
 
 export default class ComicList extends Component {
-    renderItem = ({ item }) => <ComicItem comic={item} />
+    static navigationOptions = {
+        title: 'ComicList',
+        headerTitleStyle: {
+            width: '100%',
+            textAlign: 'center',
+        },
+        headerLeft: (<View></View>),
+        headerRight: (<View></View>)
+    };
+    renderItem = ({ item }) => <ComicItem comic={item} navigation={this.props.navigation} />
 
     render() {
         return (
@@ -12,8 +21,12 @@ export default class ComicList extends Component {
                 <FlatList
                     numColumns={2}
                     data={data}
+                    keyExtractor={(item) => item.id.toString()}
                     renderItem={this.renderItem}
                 />
+                <Button
+                    title={'button'}
+                    onPress={() => this.props.navigation.navigate('ComicDetail')} />
             </View>
         );
     }
