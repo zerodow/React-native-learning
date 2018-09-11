@@ -24,7 +24,7 @@ export default class CakeDetail extends Component {
       <View style={{ flex: 1, backgroundColor: '#FFF4F8' }}>
         <View style={[styles.list, { backgroundColor: this.props.navigation.getParam('cake').color }]}>
           <Image
-            resizeMode='stretch'
+            resizeMode='contain'
             style={{ paddingLeft: 10, width: '50%', height: '80%' }}
             source={{ uri: this.props.navigation.getParam('cake').photo }} />
           <View style={styles.wrapTitle}>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     width: '100%' - 10,
     margin: 5,
     borderRadius: 5,
-    height: Dimensions.get('window').height / 3,
+    height: Dimensions.get('window').height * 0.25,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

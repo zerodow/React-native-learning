@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import AutoScaleImage from './AutoScaleImage';
 
 const heightScreen = Dimensions.get('window').height
 
@@ -20,7 +19,7 @@ export default class CakeItem extends Component {
       <TouchableOpacity style={[styles.item, { backgroundColor: this.props.cake.color, }]}
         onPress={() => this.props.navigation.navigate('CakeDetail', { cake: this.props.cake })}>
         <Image
-          resizeMode='stretch'
+          resizeMode='contain'
           style={{ paddingLeft: 10, width: '50%', height: '80%' }}
           source={{ uri: this.props.cake.photo }} />
         <View style={styles.wrapTitle}>
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
   item: {
     width: '100%' - 10,
     flexDirection: 'row',
-    height: heightScreen / 3,
+    height: heightScreen * 0.25,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
