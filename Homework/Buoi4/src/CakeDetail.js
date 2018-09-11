@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'
 
 export default class CakeDetail extends Component {
   static navigationOptions = {
@@ -20,17 +21,22 @@ export default class CakeDetail extends Component {
   }
 
   render() {
+    const color = this.props.navigation.getParam('cake').color
     return (
       <View style={{ flex: 1, backgroundColor: '#FFF4F8' }}>
-        <View style={[styles.list, { backgroundColor: this.props.navigation.getParam('cake').color }]}>
-          <Image
-            resizeMode='contain'
-            style={{ paddingLeft: 10, width: '50%', height: '80%' }}
-            source={{ uri: this.props.navigation.getParam('cake').photo }} />
-          <View style={styles.wrapTitle}>
-            <Text style={styles.title}>{this.props.navigation.getParam('cake').name}</Text>
+        <LinearGradient colors={[color['0'], color['1'], color['2']]}
+          start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+          style={{ margin: 5, borderRadius: 5 }}>
+          <View style={[styles.list]}>
+            <Image
+              resizeMode='contain'
+              style={{ paddingLeft: 10, width: '50%', height: '80%' }}
+              source={{ uri: this.props.navigation.getParam('cake').photo }} />
+            <View style={styles.wrapTitle}>
+              <Text style={styles.title}>{this.props.navigation.getParam('cake').name}</Text>
+            </View>
           </View>
-        </View>
+        </LinearGradient>
         <View style={styles.item}>
           <FlatList
             data={this.props.navigation.getParam('cake').item}
@@ -45,9 +51,7 @@ export default class CakeDetail extends Component {
 
 const styles = StyleSheet.create({
   list: {
-    width: '100%' - 10,
-    margin: 5,
-    borderRadius: 5,
+    width: '100%',
     height: Dimensions.get('window').height * 0.25,
     flexDirection: 'row',
     justifyContent: 'center',
