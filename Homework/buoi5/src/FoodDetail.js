@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { formatNumbersAsCode } from './handle';
+import Swiper from 'react-native-swiper';
 
 import AutoScale from './AutoScale';
 const widthScr = Dimensions.get('window').width
@@ -13,13 +14,22 @@ export default class FoodDetail extends Component {
 
     render() {
         const food = this.props.navigation.getParam('food')
-        return (
-            <View style={styles.container}>
+        let banners = [];
+        for (let i in food.createdBy.photos) {
+            let banner = food.createdBy.photos[i];
+            banners.push(
                 <View style={{ width: '100%', height: '100%' }}>
                     <AutoScale
                         width={widthScr}
-                        uriImage={food.image} />
+                        uriImage={banner} />
                 </View>
+            );
+        }
+        return (
+            <View style={styles.container}>
+                <Swiper horizontal={true}>
+                    {banners}
+                </Swiper>
                 <View style={styles.title}>
                     <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold', marginLeft: 5, marginRight: 5 }}>{food.dish.foodName}</Text>
                     {food.dish.price == 0
