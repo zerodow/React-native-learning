@@ -1,0 +1,3 @@
+rootProject.name = 'buoi5'
+
+include ':app'
