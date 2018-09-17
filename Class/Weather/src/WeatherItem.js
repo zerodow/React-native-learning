@@ -10,7 +10,9 @@ export default class WeatherItem extends Component {
         };
     }
 
+
     render() {
+        console.log(this.props.weather)
         let abc = this.props.weather.weather[0].main
         let ahihi;
         switch (abc) {
@@ -49,14 +51,14 @@ export default class WeatherItem extends Component {
             default:
                 break;
         }
-        
+
         return (
             <View style={{ height: 70, width: width * 0.8, backgroundColor: '#2E2B3D', margin: 10, flexDirection: 'row' }}>
                 <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
                     <Text style={{ color: 'white', fontSize: 20, marginLeft: 10 }}>{convertDate(this.props.weather.dt)}</Text>
                 </View>
                 <View style={{ alignItems: 'center', justifyContent: 'flex-end', flex: 1, flexDirection: 'row', marginRight: 10 }}>
-                    <Text style={{ color: 'white', fontSize: 20, marginRight: 10 }}> {convertTemp(this.props.weather.temp.day).doC}</Text>
+                    <Text style={{ color: 'white', fontSize: 20, marginRight: 10 }}> {convertTemp(this.props.weather.main.temp).doC}</Text>
                     {ahihi}
                 </View>
 

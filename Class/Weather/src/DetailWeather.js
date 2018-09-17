@@ -10,19 +10,20 @@ export default class DetailWeather extends Component {
         C: 'white',
         F: 'gray',
         current: 'light rain',
-        temp: convertTemp(this.props.weather.temp.day).doC
+        temp: convertTemp(this.props.weather.main.temp).doC
     }
+
     onclick(string) {
         if (string == 'C') {
             this.setState({
-                temp: convertTemp(this.props.weather.temp.day).doC,
+                temp: convertTemp(this.props.weather.main.temp).doC,
                 C: 'white',
                 F: 'gray'
             })
 
         } else {
             this.setState({
-                temp: convertTemp(this.props.weather.temp.day).doF,
+                temp: convertTemp(this.props.weather.main.temp).doF,
                 C: 'gray',
                 F: 'white'
             })
@@ -33,12 +34,10 @@ export default class DetailWeather extends Component {
         switch (this.props.weather.weather[0].main) {
             case 'Clear':
                 ahihi = (
-                    // <View style={{ backgroundColor: 'blue' }}>
                     <Image
                         resizeMode='contain'
                         style={{ width: '80%', }}
                         source={require(`../image/clear.png`)} />
-                    // </View>
                 )
                 break;
 

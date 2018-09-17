@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, View, Text, StyleSheet, FlatList, ActivityIndicator, Dimensions, TextInput, TouchableOpacity } from 'react-native';
-import SearchBar from './src/SearchBar'
 import DetailWeather from './src/DetailWeather';
 import WeatherItem from './src/WeatherItem';
+import axios from 'react-native-axios';
 
 const { width, height } = Dimensions.get('window')
 
@@ -14,41 +14,48 @@ export default class Weather extends Component {
   }
 
   componentDidMount() {
-    fetch('http://api.openweathermap.org/data/2.5/forecast/daily?q=hanoi&appid=927d09bc49dbee6aac7f5cb1df707542')
-      .then((response) => response.json())
-      .then(res => {
-        if (res.cod !== '200') {
+    // fetch('http://api.openweathermap.org/data/2.5/forecast?q=Hanoi&appid=868fd2783cfca38586e6fbe659c6a49d')
+    //   .then((response) => response.json())
+    //   .then(res => {
+    // if (res.cod !== '200') {
+    //   Alert.alert('City not found')
+    //   this.setState({ isLoading: false })
+    // } else {
+    //   this.setState({ data: res, isLoading: false, list: res.list.splice(1, 6) })
+    // }
+    //     // console.log(res)
+
+    //     // console.log(res.list.splice(0, 1))
+
+    //   })
+    axios.get('http://api.openweathermap.org/data/2.5/forecast?q=Hanoi&appid=868fd2783cfca38586e6fbe659c6a49d')
+      .then((res) => {
+        console.log(res.data.list)
+        if (res.data.cod !== '200') {
           Alert.alert('City not found')
           this.setState({ isLoading: false })
         } else {
-          this.setState({ data: res, isLoading: false, list: res.list.splice(1, 6) })
+          this.setState({ data: res.data, isLoading: false, list: res.data.list.splice(1, 6) })
         }
-        // console.log(res)
-
-        // console.log(res.list.splice(0, 1))
-
       })
       .catch(error => console.log(error))
 
   }
 
-
   onClick() {
     // console.log(this.state.data)
     // console.log(this.state.text)
     this.setState({ isLoading: true })
-    fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.text}&appid=927d09bc49dbee6aac7f5cb1df707542`)
-      .then((response) => response.json())
-      .then(res => {
-        if (res.cod !== '200') {
+    axios.get('http://api.openweathermap.org/data/2.5/forecast?q=Hanoi&appid=868fd2783cfca38586e6fbe659c6a49d')
+      .then((res) => {
+        if (res.data.cod !== '200') {
           Alert.alert('City not found')
           this.setState({ isLoading: false })
         } else {
-          this.setState({ data: res, isLoading: false, list: res.list.splice(1, 6) })
+          this.setState({ data: res.data, isLoading: false, list: res.data.list.splice(1, 6) })
         }
       })
       .catch(error => console.log(error))
-
   }
 
   renderItem(item) {
@@ -68,6 +75,7 @@ export default class Weather extends Component {
           <TextInput
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text}
+            placeholder='Nhập địa điểm'
             style={styles.inputWrap} />
           <TouchableOpacity style={{
             flex: 3,
