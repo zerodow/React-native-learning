@@ -12,6 +12,9 @@ import {
   View,
   YellowBox
 } from 'react-native';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import rootReducer from '../reducers';
 import { createStackNavigator } from 'react-navigation';
 import Schedule from './Schedule';
 import AddTask from './AddTask';
@@ -21,11 +24,14 @@ const Navigation = createStackNavigator({
   AddTask: { screen: AddTask }
 })
 
+const store = createStore(rootReducer)
 
 export default class App extends Component {
   render() {
     return (
-      <Navigation />
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
     );
   }
 }

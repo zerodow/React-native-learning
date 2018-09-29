@@ -5,8 +5,9 @@ import { calendarHighlight, calendarBackground } from '../../styles'
 import ItemDate from '../components/ItemDate';
 import ItemTask from '../components/ItemTask';
 import { data } from '../../database.json'
+import { connect } from 'react-redux'
 
-export default class Schedule extends Component {
+class Schedule extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Schedule',
         headerTitleStyle: {
@@ -44,13 +45,21 @@ export default class Schedule extends Component {
                 <SectionList
                     renderItem={this.renderItem}
                     renderSectionHeader={this.renderSectionHeader}
-                    sections={data}
+                    sections={this.props.tasks}
                     keyExtractor={(item) => item.id}
                 />
             </View>
         );
     }
 }
+
+const mapStateToProps = (store) => {
+    return {
+        tasks: store.tasks
+    }
+}
+
+export default connect(mapStateToProps)(Schedule)
 
 const styles = StyleSheet.create({
     container: {

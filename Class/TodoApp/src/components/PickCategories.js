@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { color } from '../../styles'
+import { connect } from 'react-redux'
+import { pickCategory } from '../action'
+
 const Category = ['To do', 'Shopping', 'Birthday', 'Event', 'Personal']
 
-export default class PickCategories extends Component {
+class PickCategories extends Component {
+    state = {
+        category: 'Birthday'
+    }
     renderItem(item) {
         return (
-            <TouchableOpacity style={[styles.category, { backgroundColor: this.chooseColorByCategory(item) }]}>
+            <TouchableOpacity style={[styles.category, { backgroundColor: this.chooseColorByCategory(item) }]}
+                // onPress={() => this.props.onGet(item)}
+                onPress={() => this.props.pickCategory(item)}
+            >
                 <Text style={styles.itemCategory}>{item}</Text>
             </TouchableOpacity >
         )
@@ -33,11 +42,14 @@ export default class PickCategories extends Component {
                     keyExtractor={(item) => item + ''}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({ item }) => this.renderItem(item)} />
-                <Text style={[styles.title, { color: 'orange' }]}>This task belongs to Birthday category</Text>
+
             </View>
         );
     }
 }
+
+export default connect(null, { pickCategory })(PickCategories)
+
 const styles = StyleSheet.create({
     itemCategory: {
         fontSize: 16,
