@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import RoundCheckbox from 'rn-round-checkbox';
 import { color } from '../../styles'
-export default class ItemTask extends Component {
+import { connect } from 'react-redux'
+import { toogleTask, deleleTask } from '../action'
+class ItemTask extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,20 +23,37 @@ export default class ItemTask extends Component {
         }
     }
 
+    deleteTask = () => {
+        this.props.deleleTask({
+            dayId: this.props.dayId,
+            taskId: this.props.item.id
+        })
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.checkBox}>
                     <RoundCheckbox
                         size={24}
-                        checked={this.state.isSelected}
-                        onValueChange={(newValue) => { this.setState({ isSelected: !this.state.isSelected }) }}
+                        checked={this.props.item.isDone}
+                        onValueChange={(newValue) => {
+                            let data = {
+                                dayId: this.props.dayId,
+                                taskId: this.props.item.id
+                            }
+                            this.props.toogleTask(
+                                data
+                            )
+                        }}
                     />
                 </View>
                 <View style={styles.time}>
                     <Text style={{ fontSize: 18 }}>{this.props.item.time}</Text>
                 </View>
-                <TouchableOpacity style={[styles.wrapTask, { backgroundColor: this.chooseColorByCategory() }]}>
+                <TouchableOpacity
+                    onLongPress={this.deleteTask}
+                    style={[styles.wrapTask, { backgroundColor: this.props.item.isDone ? 'gray' : this.chooseColorByCategory() }]}>
                     <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{this.props.item.category}</Text>
                     <Text style={{ color: 'white', fontSize: 14, marginTop: 2 }}>{this.props.item.content}</Text>
                 </TouchableOpacity>
@@ -42,6 +61,8 @@ export default class ItemTask extends Component {
         );
     }
 }
+
+export default connect(null, { toogleTask, deleleTask })(ItemTask)
 
 const styles = StyleSheet.create({
     container: {

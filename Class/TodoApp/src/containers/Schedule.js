@@ -30,9 +30,9 @@ class Schedule extends Component {
         </TouchableOpacity>)
     })
 
-    renderItem = ({ item }) => <ItemTask item={item} />
+    renderItem = ({ item, section }) => <ItemTask item={item} dayId={section.id} />
 
-    renderSectionHeader = ({ section: { date } }) => <ItemDate date={date} />
+    renderSectionHeader = ({ section: { date, data } }) => (data.length !== 0 && <ItemDate date={date} />)
 
     render() {
         return (
@@ -48,6 +48,10 @@ class Schedule extends Component {
                     sections={this.props.tasks}
                     keyExtractor={(item) => item.id}
                 />
+                <TouchableOpacity style={{ width: 50, height: 30, backgroundColor: 'red' }}
+                    onPress={() => console.log(this.props.tasks)}>
+                    <Text></Text>
+                </TouchableOpacity>
             </View>
         );
     }

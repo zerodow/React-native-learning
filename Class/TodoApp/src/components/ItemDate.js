@@ -5,6 +5,7 @@ export default class ItemDate extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
         };
     }
 
@@ -12,7 +13,12 @@ export default class ItemDate extends Component {
         // console.log(this.props.date)
     }
 
+    componentDidUpdate() {
+        console.log(this.props.date)
+    }
+
     render() {
+        // console.log(this.props.date)
         const dayOfWeek = this.props.date.substring(0, this.props.date.indexOf(' '))
         const date = this.props.date.substring(this.props.date.indexOf(' ') + 1)
         return (

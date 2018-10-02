@@ -12,32 +12,19 @@ import { connect } from 'react-redux'
 import { addTask } from '../action'
 
 class AddTask extends Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: 'AddTask',
-        headerTitleStyle: {
-            width: '85%',
-            textAlign: 'center',
-            fontSize: 22,
-            fontWeight: 'bold',
-            color: 'gray'
-        },
-        headerLeft: (<TouchableOpacity
-            onPress={() => navigation.goBack(null)}>
-            <Image
-                style={{ height: '50%', aspectRatio: 1, marginLeft: 10 }}
-                source={require('../../back.png')} />
-        </TouchableOpacity>),
-        headerRight: (<TouchableOpacity
-            onPress={() => navigation.navigate('AddTask')}>
-            <Text style={{ color: color.calendarHighlight, fontSize: 18, marginRight: 10, fontWeight: 'bold' }}>Done</Text>
-        </TouchableOpacity>)
-    })
-
     state = {
-        selectedDate: '',
+        selectedDate: this.changeForm(new Date()),
         isTimePickerVisible: false,
         selectedTime: new Date().toTimeString().substring(0, 5),
-        category: 'To do'
+        category: 'To do',
+        //number of days from 1/1/1970
+        dayId: Math.floor(new Date().getTime() / (24 * 60 * 60 * 1000)),
+        //number of milis from 1/1/1970
+        taskId: new Date().getTime()
+    }
+
+    componentDidMount() {
+        this.props.navigation.setParams({ addTask: this.addMoreTask })
     }
 
     chooseColorByCategory = (category) => {
@@ -54,12 +41,40 @@ class AddTask extends Component {
     changeForm(date) {
         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        return days[date.getDay() + 1] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+        return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
     }
 
     onDateSelected = (date) => {
-        // console.log(date._d)
-        this.setState({ selectedDate: this.changeForm(date._d) })
+        this.setState({
+            selectedDate: this.changeForm(date._d),
+            dayId: Math.floor(date._d.getTime() / (24 * 60 * 60 * 1000))
+        }, () => console.log(this.state.dayId))
+    }
+
+    addMoreTask = () => {
+        let task = {
+            id: this.state.dayId,
+            date: this.state.selectedDate,
+            task: {
+                id: this.state.taskId,
+                category: this.props.hello,
+                content: "Go to new york",
+                time: this.state.selectedTime,
+                isDone: false
+            }
+        }
+        this.props.addTask({
+            id: this.state.dayId,
+            date: this.state.selectedDate,
+            task: {
+                id: this.state.taskId,
+                category: this.props.hello,
+                content: this.state.content,
+                time: this.state.selectedTime,
+                isDone: false
+            }
+        })
+        this.props.navigation.navigate('Schedule')
     }
 
     render() {
@@ -74,6 +89,8 @@ class AddTask extends Component {
                 <ItemDate date={data[0].date} />
                 <Text style={styles.title}>Content</Text>
                 <TextInput
+                    autoCorrect={false}
+                    onChangeText={(text) => this.setState({ content: text })}
                     underlineColorAndroid='transparent'
                     style={styles.input}
                 />
@@ -85,28 +102,23 @@ class AddTask extends Component {
                 <TimePicker
                     mode='time'
                     onCancel={(time) => console.log(time)}
-                    onConfirm={(time) => this.setState({ selectedTime: time.toTimeString().substring(0, 5), isTimePickerVisible: false })}
+                    onConfirm={(time) => this.setState({
+                        selectedTime: time.toTimeString().substring(0, 5),
+                        isTimePickerVisible: false,
+                        taskId: time.getTime()
+                    })}
                     isVisible={this.state.isTimePickerVisible} />
                 <Text style={styles.title}>Category</Text>
                 <PickCategories
                 // onGet={(name) => this.setState({ category: name })} 
                 />
                 <Text style={[styles.title, { color: this.chooseColorByCategory(this.props.hello) }]}>This task belongs to {this.props.hello} category</Text>
-                <Button
+                {/* <Button
                     title={'add'}
                     onPress={() => {
-                        this.props.addTask({
-                            id: 1,
-                            date: 'Friday 22 June 2018',
-                            task: {
-                                id: 1239,
-                                category: "Personal",
-                                content: "Go to New York",
-                                time: "09:00"
-                            }
-                        })
+                        
                     }}
-                />
+                /> */}
             </View>
         );
     }
