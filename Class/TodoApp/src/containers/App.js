@@ -15,13 +15,17 @@ import {
   Image
 } from 'react-native';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux';
-import rootReducer from '../reducers';
+// import { createStore } from 'redux';
+// import rootReducer from '../reducers';
+import configureStore from '../configureStore'
 import { createStackNavigator } from 'react-navigation';
 import Schedule from './Schedule';
 import AddTask from './AddTask';
 import { color } from '../../styles'
+import { PersistGate } from 'redux-persist/integration/react'
+
 YellowBox.ignoreWarnings(['Warning: isMounted'])
+
 const Navigation = createStackNavigator({
   Schedule: {
     screen: Schedule,
@@ -69,20 +73,24 @@ const Navigation = createStackNavigator({
         (<TouchableOpacity
           onPress={
             navigation.getParam('addTask')}
-           >
+        >
           <Text style={{ color: color.calendarHighlight, fontSize: 18, marginRight: 10, fontWeight: 'bold' }}>Done</Text>
         </TouchableOpacity>)
     })
   }
 })
 
-const store = createStore(rootReducer)
+// const store = createStore(rootReducer)
+
+const { store, persistor } = configureStore()
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Navigation />
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
       </Provider>
     );
   }

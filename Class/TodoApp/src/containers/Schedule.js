@@ -4,8 +4,9 @@ import CalendarStrip from 'react-native-calendar-strip';
 import { calendarHighlight, calendarBackground } from '../../styles'
 import ItemDate from '../components/ItemDate';
 import ItemTask from '../components/ItemTask';
-import { data } from '../../database.json'
 import { connect } from 'react-redux'
+
+const listReference = 'listReference'
 
 class Schedule extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -30,6 +31,31 @@ class Schedule extends Component {
         </TouchableOpacity>)
     })
 
+    onDateSelected = (date) => {
+        // let day = this.changeForm(date._d)
+
+        // let index = this.props.tasks.filter((item,index)=>{
+        //     if(item.date === day){
+        //         return index
+        //     }
+        // })
+
+        const dayId = Math.floor(date._d.getTime() / (24 * 60 * 60 * 1000))
+        const index = this.props.tasks.map(item => item.id).indexOf(dayId)
+
+        index !== -1 && this.refs.listReference.scrollToLocation({
+            sectionIndex: index,
+            itemIndex: 0
+        })
+    }
+
+
+    changeForm(date) {
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
+    }
+
     renderItem = ({ item, section }) => <ItemTask item={item} dayId={section.id} />
 
     renderSectionHeader = ({ section: { date, data } }) => (data.length !== 0 && <ItemDate date={date} />)
@@ -38,11 +64,13 @@ class Schedule extends Component {
         return (
             <View style={styles.container}>
                 <CalendarStrip
+                    onDateSelected={this.onDateSelected}
                     highlightDateNumberStyle={{ color: calendarHighlight }}
                     highlightDateNameStyle={{ color: calendarHighlight }}
                     calendarColor={calendarBackground}
                     style={styles.calendar} />
                 <SectionList
+                    ref={listReference}
                     renderItem={this.renderItem}
                     renderSectionHeader={this.renderSectionHeader}
                     sections={this.props.tasks}

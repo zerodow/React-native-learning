@@ -1,8 +1,9 @@
-import { ADD_DATA } from "../container/const";
+import { ADD_DATA, ADD_HOT_MOVIE } from "../container/const";
 
 const initialState = {
     data: [],
-    searchText: ''
+    searchText: '',
+    hotMovies: []
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -12,6 +13,13 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 data: action.payload
             }
+
+        case ADD_HOT_MOVIE:
+            return {
+                ...state,
+                hotMovies: action.payload
+            }
+            
         default:
             return state
     }

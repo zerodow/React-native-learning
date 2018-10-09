@@ -9,14 +9,6 @@ export default class ItemDate extends Component {
         };
     }
 
-    componentDidMount() {
-        // console.log(this.props.date)
-    }
-
-    componentDidUpdate() {
-        console.log(this.props.date)
-    }
-
     render() {
         // console.log(this.props.date)
         const dayOfWeek = this.props.date.substring(0, this.props.date.indexOf(' '))
