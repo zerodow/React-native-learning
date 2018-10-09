@@ -35,8 +35,8 @@ export default class DetailMovie extends Component {
                             height={200}
                             uri={`${URL_IMAGE}${this.state.data.poster_path}`}
                         />
-                        <View style={{ marginTop: 10, marginLeft: 20 }}>
-                            <Text style={{ fontSize: 22, fontWeight: 'bold', color: 'white', marginTop: 50 }}
+                        <View style={{ marginTop: 10, marginLeft: 20, width: WIDTH_SCREEN / 2 }}>
+                            <Text style={{ fontSize: 22, fontWeight: 'bold', color: 'white', marginTop: 70 }}
                                 numberOfLines={1}>{this.state.data.title}</Text>
                             <Text style={[styles.text, { marginTop: 20, fontSize: 12 }]}> {this.state.data.release_date}</Text>
                         </View>
