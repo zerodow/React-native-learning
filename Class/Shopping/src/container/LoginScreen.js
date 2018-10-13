@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Platform } from 'react-native';
-import { backgroundColor, primaryColorBrown } from '../styles'
-// import { Button } from 'react-native-elements';
+import { backgroundColor, primaryColorBrown, primaryColorGreen, primaryColorRed } from '../styles'
+import { Button } from 'react-native-elements';
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class LoginScreen extends Component {
 
     renderInput = () => {
         return (
-            <View style={{ paddingHorizontal: 20 }}>
+            <View>
                 <View style={{ flexDirection: 'row' }}>
                     <Image
                         style={{ width: 20, height: 20, marginRight: 5 }}
@@ -48,11 +48,36 @@ export default class LoginScreen extends Component {
 
     renderButton = () => {
         return (
-            <View>
-                {/* <Button
-                    title='BUTTON'
-                /> */}
+            <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'space-around' }}>
+                <Button
+                    titleStyle={{ fontSize: 16 }}
+                    title="Sign up"
+                    buttonStyle={{
+                        backgroundColor: primaryColorGreen,
+                        width: 100,
+                        height: 45,
+                        borderRadius: 30
+                    }}
+                    containerStyle={{ marginTop: 20, marginHorizontal: 5 }}
+                />
+                <Button
+                    titleStyle={{ fontSize: 16 }}
+                    title="Log In"
+                    buttonStyle={{
+                        backgroundColor: primaryColorRed,
+                        width: 100,
+                        height: 45,
+                        borderRadius: 30
+                    }}
+                    containerStyle={{ marginTop: 20, marginHorizontal: 5 }}
+                />
             </View>
+        )
+    }
+
+    renderError = () => {
+        return (
+            <Text style={{ color: primaryColorRed, marginTop: 20, }}>Error ...</Text>
         )
     }
 
@@ -61,6 +86,7 @@ export default class LoginScreen extends Component {
             <View style={styles.container}>
                 {this.renderLogo()}
                 {this.renderInput()}
+                {this.renderError()}
                 {this.renderButton()}
             </View>
         );
@@ -70,6 +96,7 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 20,
         backgroundColor: backgroundColor,
         justifyContent: 'center'
     },

@@ -11,11 +11,19 @@ import {
   View
 } from 'react-native';
 import LoginScreen from './LoginScreen';
+import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import SplashScreen from './SplashScreen';
+import HomeScreen from './HomeScreen';
 
+const SwitchNavigation = createSwitchNavigator({
+  SplashScreen: { screen: SplashScreen },
+  LoginScreen: { screen: LoginScreen },
+  HomeScreen: { screen: HomeScreen }
+})
 export default class App extends Component {
   render() {
     return (
-      <LoginScreen />
+      <SwitchNavigation />
     );
   }
 }
