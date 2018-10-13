@@ -14,6 +14,8 @@ import LoginScreen from './LoginScreen';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import SplashScreen from './SplashScreen';
 import HomeScreen from './HomeScreen';
+import firebase from 'react-native-firebase'
+
 
 const SwitchNavigation = createSwitchNavigator({
   SplashScreen: { screen: SplashScreen },
@@ -21,6 +23,9 @@ const SwitchNavigation = createSwitchNavigator({
   HomeScreen: { screen: HomeScreen }
 })
 export default class App extends Component {
+  componentDidMount(){
+    console.log(firebase)
+  }
   render() {
     return (
       <SwitchNavigation />
