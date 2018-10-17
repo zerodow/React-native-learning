@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Platform } from 'react-native';
 import { backgroundColor, primaryColorBrown, primaryColorGreen, primaryColorRed } from '../styles'
 import { Button } from 'react-native-elements';
+import firebase from 'react-native-firebase';
 
 export default class LoginScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
+    state = {
+        email: '',
+        password: '',
+        error: '',
+        isSigningIn: false,
+        isSigningUp: false
     }
 
     renderLogo = () => {
@@ -20,6 +23,49 @@ export default class LoginScreen extends Component {
         )
     }
 
+    onSignIn = () => {
+
+        if (this.state.email === '') {
+            this.setState({ error: 'Error: Pls enter email' })
+            return
+        }
+
+        if (this.state.password === '') {
+            this.setState({ error: 'Error: Pls enter password' })
+            return
+        }
+        this.setState({ isSigningIn: true })
+
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res => {
+                console.log(res)
+                this.setState({ isSigningIn: false })
+            })
+            .catch(error => this.setState({ error: error.toString(), isSigningIn: false }))
+    }
+
+    onSignUp = () => {
+
+        if (this.state.email === '') {
+            this.setState({ error: 'Error: Pls enter email' })
+            return
+        }
+
+        if (this.state.password === '') {
+            this.setState({ error: 'Error: Pls enter password' })
+            return
+        }
+
+        this.setState({ isSigningUp: true })
+
+        firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res => {
+                console.log(res)
+                this.setState({ isSigningUp: false })
+            })
+            .catch(error => this.setState({ error: error.toString(), isSigningUp: false }))
+    }
+
     renderInput = () => {
         return (
             <View>
@@ -30,7 +76,9 @@ export default class LoginScreen extends Component {
                     <Text style={styles.textStyle}>Email</Text>
                 </View>
                 <TextInput
+                    keyboardType={'email-address'}
                     style={styles.input}
+                    onChangeText={(email) => this.setState({ email })}
                 />
 
                 <View style={{ flexDirection: 'row', marginTop: 10, }}>
@@ -41,6 +89,7 @@ export default class LoginScreen extends Component {
                 </View>
                 <TextInput
                     style={styles.input}
+                    onChangeText={(password) => this.setState({ password })}
                 />
             </View>
         )
@@ -50,6 +99,8 @@ export default class LoginScreen extends Component {
         return (
             <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'space-around' }}>
                 <Button
+                    loading={this.state.isSigningUp}
+                    onPress={this.onSignUp}
                     titleStyle={{ fontSize: 16 }}
                     title="Sign up"
                     buttonStyle={{
@@ -61,6 +112,8 @@ export default class LoginScreen extends Component {
                     containerStyle={{ marginTop: 20, marginHorizontal: 5 }}
                 />
                 <Button
+                    loading={this.state.isSigningIn}
+                    onPress={this.onSignIn}
                     titleStyle={{ fontSize: 16 }}
                     title="Log In"
                     buttonStyle={{
@@ -77,7 +130,7 @@ export default class LoginScreen extends Component {
 
     renderError = () => {
         return (
-            <Text style={{ color: primaryColorRed, marginTop: 20, }}>Error ...</Text>
+            <Text style={{ color: primaryColorRed, marginTop: 20, }}>{this.state.error}</Text>
         )
     }
 
