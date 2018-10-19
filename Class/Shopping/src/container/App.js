@@ -9,12 +9,12 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  YellowBox
 } from 'react-native';
 import LoginScreen from './LoginScreen';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import SplashScreen from './SplashScreen';
-import HomeScreen from './HomeScreen';
 import firebase from 'react-native-firebase'
 import TabMenu from './TabMenu';
 import TabOrder from './TabOrder';
@@ -22,6 +22,9 @@ import TabHistory from './TabHistory';
 import TabInfo from './TabInfo';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import { primaryColorGreen } from '../styles';
+
+
+YellowBox.ignoreWarnings(['Warning: isMounted'])
 
 const BottomTabNavigator = createBottomTabNavigator({
   Menu: { screen: TabMenu, },

@@ -4,10 +4,6 @@ import { backgroundColor } from '../styles'
 import firebase from 'react-native-firebase'
 
 export default class SplashScreen extends Component {
-    state = {
-
-    }
-
     componentDidMount() {
         // firebase.auth().signOut()
         firebase.auth().onAuthStateChanged(res => res !== null
