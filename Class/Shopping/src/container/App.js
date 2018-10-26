@@ -12,6 +12,9 @@ import {
   Image,
   YellowBox
 } from 'react-native';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from '../reducers'
 import LoginScreen from './LoginScreen';
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import SplashScreen from './SplashScreen';
@@ -22,7 +25,9 @@ import TabHistory from './TabHistory';
 import TabInfo from './TabInfo';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import { primaryColorGreen } from '../styles';
+import HeaderTab from '../components/HeaderTab';
 
+const store = createStore(rootReducer)
 
 YellowBox.ignoreWarnings(['Warning: isMounted'])
 
@@ -34,6 +39,7 @@ const BottomTabNavigator = createBottomTabNavigator({
 }, {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        // console.log(navigation)
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Menu') {
@@ -46,9 +52,16 @@ const BottomTabNavigator = createBottomTabNavigator({
           iconName = `info-circle`;
         }
 
+        return <HeaderTab iconName={iconName} routeName={routeName} tintColor={tintColor} />
+
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        // return <View>
+        //   <Ionicons name={iconName} size={25} color={tintColor} />
+        //   {routeName === 'Order' && <View style={styles.notify}>
+        //     <Text style={{ color: 'white', fontSize: 12 }}>12</Text>
+        //   </View>}
+        // </View>
       },
     }),
     tabBarOptions: {
@@ -69,7 +82,9 @@ const SwitchNavigation = createSwitchNavigator({
 export default class App extends Component {
   render() {
     return (
-      <SwitchNavigation />
+      <Provider store={store}>
+        <SwitchNavigation />
+      </Provider>
     );
   }
 }
@@ -91,4 +106,16 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  notify: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'red',
+    position: 'absolute',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 0,
+    right: 0,
+    left: 15,
+  }
 });

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { primaryColorGreen, primaryColorBrown, primaryColorRed, backgroundColor } from '../styles'
 import firebase from 'react-native-firebase'
 import ItemFood from '../components/ItemFood';
+import { commonStyles } from '../styles'
 
 
 export default class TabMenu extends Component {
@@ -11,7 +12,7 @@ export default class TabMenu extends Component {
     super(props);
     this.state = {
       currenCategory: 'Hamburger',
-      dishes: {}
+      dishes: []
     };
   }
 
@@ -53,7 +54,6 @@ export default class TabMenu extends Component {
 
   change(item) {
     this.setState({ currenCategory: item }, () => this.loadData())
-
   }
 
   renderMenu = () => {
@@ -69,7 +69,7 @@ export default class TabMenu extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.screenContainer}>
         {this.renderCategories()}
         {this.renderMenu()}
       </View>
@@ -78,10 +78,6 @@ export default class TabMenu extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: backgroundColor
-  },
   type: {
     fontSize: 18,
     color: primaryColorGreen,

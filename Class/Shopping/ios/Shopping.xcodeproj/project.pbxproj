@@ -25,7 +25,7 @@
 		140BC8D36838412CAF3467F7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F6FEE2F3FE42099838518F /* Foundation.ttf */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		18B341FC21744BDF0096D574 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18B341FB21744BDF0096D574 /* GoogleService-Info.plist */; };
+		184858112183576800B88187 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184858102183576800B88187 /* GoogleService-Info.plist */; };
 		20AEC610F6414244893F47A6 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFFFB5AB64184FA29E63FCA0 /* SimpleLineIcons.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -383,7 +383,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		14C72CA7543E4DC0833FF579 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		179F58DA2586493F8A56A975 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
-		18B341FB21744BDF0096D574 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		184858102183576800B88187 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1ED7C1454785423F9012BA4A /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Shopping-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Shopping-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shopping-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -566,7 +566,7 @@
 		13B07FAE1A68108700A75B9A /* Shopping */ = {
 			isa = PBXGroup;
 			children = (
-				18B341FB21744BDF0096D574 /* GoogleService-Info.plist */,
+				184858102183576800B88187 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1250,7 +1250,7 @@
 				34CFE6F121C34B06A1D29823 /* FontAwesome5_Regular.ttf in Resources */,
 				738950985AD84A2598113299 /* FontAwesome5_Solid.ttf in Resources */,
 				140BC8D36838412CAF3467F7 /* Foundation.ttf in Resources */,
-				18B341FC21744BDF0096D574 /* GoogleService-Info.plist in Resources */,
+				184858112183576800B88187 /* GoogleService-Info.plist in Resources */,
 				A41FF6841D7F4E9984106EF0 /* Ionicons.ttf in Resources */,
 				6DE2FE5548D54BAF8CA2A86D /* MaterialCommunityIcons.ttf in Resources */,
 				C93135551EBB4534AA74623E /* MaterialIcons.ttf in Resources */,

@@ -8,6 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:857186530163:android:65c9014fb4ec0c2d",
+        "android_client_info": {
+          "package_name": "com.applogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857186530163-9hk4s2dfvvq92ijebjlbqku60aivodoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.applogin",
+            "certificate_hash": "3112f59a0d84ade5e1418fb89af459d53d77708d"
+          }
+        },
+        {
+          "client_id": "857186530163-eb31m9kkc523c4fftmf4f6bk11u3tb4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAikOfgdmJqi0bFTBbCevc3RCYmmODOJ7c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857186530163-eb31m9kkc523c4fftmf4f6bk11u3tb4e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "857186530163-ljr0b1p3f7r0ujgqmo6smmreucpuo4op.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.shopping"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:857186530163:android:a00f43a0b15be47c",
         "android_client_info": {
           "package_name": "com.shopping"
